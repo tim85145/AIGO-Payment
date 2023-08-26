@@ -6,37 +6,32 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,ImageSendMessage,StickerSendMessage,FollowEvent,UnfollowEvent,
-)
 from linebot.models import *
 from models.user import Users
+from models.database import db_session,init_db
 from models.product import Products
-from models.database import db_session, init_db
 from models.cart import Cart
-
 app = Flask(__name__)
 
 
-line_bot_api = LineBotApi('+I2ixntMnrSn8RwTRc6fOJv0v202vEDE0GXYM5Jzz8WLOoztnhibUy3REAMdNFuEqB/ZbM5uNC4yUY5KHAQbpV0nLTlVQn8ywh1nDY3mlfID2/dlJ1HAPqyNPDBKXgZPsMR/od0r56fbu3gMN6/K+wdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('24a8203d84fa58b823140d6b5f1ec727')
+line_bot_api = LineBotApi('N44yZEfmA3bq6c/FGbOu2CfLZ13p0sO9nFcSuymeArXSc7uF8qOIhA6eZaATEu1K9RCVkV+6GmJBJouIH2NotgsPXjCvUwsgAKd5pATaHUtlaR0hg7R8+IzpJ7nsl1gcZW914FKo67sd5246tqrG8gdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('b3b067df5cd7d0d0496b8ed94a1dd873')
 
 
 app = Flask(__name__)
 
 #建立或取得user
 def get_or_create_user(user_id):
-    #從id=user_id先搜尋有沒有這個user，如果有的話就會直接跳到return
     user = db_session.query(Users).filter_by(id=user_id).first()
-    #沒有的話就會透過line_bot_api來取得用戶資訊
+
     if not user:
         profile = line_bot_api.get_profile(user_id)
-        #然後再建立user並且存入到資料庫當中
-        user = Users(id=user_id, nick_name=profile.display_name, image_url=profile.picture_url)
+
+        user = Users(id=user_id,nick_name=profile.display_name, image_url=profile.picture_url)
         db_session.add(user)
         db_session.commit()
-
     return user
+
 
 def about_us_event(event):
     emoji = [
@@ -93,11 +88,11 @@ def handle_message(event):
     get_or_create_user(event.source.user_id)
     profile = line_bot_api.get_profile(event.source.user_id)
     uid = profile.user_id
-    cart = Cart(user_id=event.source.user_id)
     message_text = str(event.message.text).lower()
-
+    cart = Cart(user_id=event.source.user_id)
+    message = None
     if message_text == '@使用說明':
-        about_us_event(event)
+        about_us_event
     elif message_text == '我想訂購商品':
         message = Products.list_all()
     #當user要訂購時就會執行這段程式
@@ -133,17 +128,11 @@ def handle_message(event):
             message = cart.display()#就會使用 display()顯示購物車內容
         else:
             message = TextSendMessage(text='Your cart is empty now.')
-
     if message:
         line_bot_api.reply_message(
-            event.reply_token,
-            message
-        )
-
-    # line_bot_api.reply_message(
-    #     event.reply_token, TextSendMessage(text='Hi! Welcome to LSTORE.')
-    # )
-
+        event.reply_token,
+        message
+    )
 #初始化產品資訊
 @app.before_first_request
 def init_products():
@@ -167,13 +156,6 @@ def init_products():
         #記得要from models.product import Products在app.py
         
 
-@handler.add(FollowEvent)
-def handle_follow(event):
-    welcome_msg = '''Hello! 您好，歡迎您成為 Master Finance 的好友！
-    
-我是Master 財經小幫手'''
-
-	
 if __name__ == "__main__":
     init_products()
     app.run()

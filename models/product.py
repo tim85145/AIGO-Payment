@@ -1,19 +1,22 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column,String, Integer
+from linebot.models import *
 from models.database import Base, db_session
 from urllib.parse import quote
-from linebot.models import *
+
 
 
 class Products(Base):
     __tablename__ = 'products'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key = True)#主鍵
     name = Column(String)
     price = Column(Integer)
     description = Column(String)
     product_image_url = Column(String)
 
-    #列出所有的產品
+
+
+#列出所有的產品
     @staticmethod
     def list_all():
         products = db_session.query(Products).all()#抓取資料庫中所有產品的資料
@@ -59,7 +62,7 @@ class Products(Base):
                             style='primary',
                             color='#1DB446',
                             action=URIAction(label='Add to Cart',
-                                             uri='line://oaMessage/{base_id}/?{message}'.format(base_id='@201qgjxe',
+                                             uri='line://oaMessage/{base_id}/?{message}'.format(base_id='@030clcsu',
                                                                                                 message=quote("{product}, I'd like to have:".format(product=product.name)))),
                         )
                     ]
