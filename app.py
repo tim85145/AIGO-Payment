@@ -92,7 +92,7 @@ def handle_message(event):
     cart = Cart(user_id=event.source.user_id)
     message = None
     if message_text == '@使用說明':
-        about_us_event
+        about_us_event(event)
     elif message_text == '我想訂購商品':
         message = Products.list_all()
     #當user要訂購時就會執行這段程式
