@@ -140,16 +140,16 @@ def init_products():
     result = init_db()#先判斷資料庫有沒有建立，如果還沒建立就會進行下面的動作初始化產品
     if result:
         init_data = [Products(name='Coffee',
-                              product_image_url='https://i.imgur.com/DKzbk3l.jpg',
+                              product_image_url='https://i.imgur.com/QeV9g7t.png',
                               price=150,
                               description='nascetur ridiculus mus. Donec quam felis, ultricies'),
                      Products(name='Tea',
-                              product_image_url='https://i.imgur.com/PRTxyhq.jpg',
+                              product_image_url='https://i.imgur.com/4OMmmI7.png',
                               price=120,
                               description='adipiscing elit. Aenean commodo ligula eget dolor'),
                      Products(name='Cake',
                               price=180,
-                              product_image_url='https://i.imgur.com/PRm22i8.jpg',
+                              product_image_url='https://i.imgur.com/iMZQLjv.jpg',
                               description='Aenean massa. Cum sociis natoque penatibus')]
         db_session.bulk_save_objects(init_data)#透過這個方法一次儲存list中的產品
         db_session.commit()#最後commit()才會存進資料庫
