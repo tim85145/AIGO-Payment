@@ -14,8 +14,8 @@ from models.cart import Cart
 app = Flask(__name__)
 
 
-line_bot_api = LineBotApi('N44yZEfmA3bq6c/FGbOu2CfLZ13p0sO9nFcSuymeArXSc7uF8qOIhA6eZaATEu1K9RCVkV+6GmJBJouIH2NotgsPXjCvUwsgAKd5pATaHUtlaR0hg7R8+IzpJ7nsl1gcZW914FKo67sd5246tqrG8gdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('b3b067df5cd7d0d0496b8ed94a1dd873')
+line_bot_api = LineBotApi('+I2ixntMnrSn8RwTRc6fOJv0v202vEDE0GXYM5Jzz8WLOoztnhibUy3REAMdNFuEqB/ZbM5uNC4yUY5KHAQbpV0nLTlVQn8ywh1nDY3mlfID2/dlJ1HAPqyNPDBKXgZPsMR/od0r56fbu3gMN6/K+wdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('24a8203d84fa58b823140d6b5f1ec727')
 
 
 app = Flask(__name__)
