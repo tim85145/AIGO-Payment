@@ -96,10 +96,17 @@ def handle_message(event):
 
     if message_text == '@使用說明':
         about_us_event(event)
+    elif message_text == '我想訂購商品':
+        message = Products.list_all()
+    if message:
+        line_bot_api.reply_message(
+            event.reply_token,
+            message
+        )
 
-    line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Hi! Welcome to LSTORE.')
-    )
+    # line_bot_api.reply_message(
+    #     event.reply_token, TextSendMessage(text='Hi! Welcome to LSTORE.')
+    # )
 
 #初始化產品資訊
 @app.before_first_request
