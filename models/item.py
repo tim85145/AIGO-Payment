@@ -10,8 +10,8 @@ class Items(Base):
     product_id = Column('product_id', ForeignKey('products.id'))
     product_name = Column(String)
     product_price = Column(Integer)
-    quatity = Column(Integer)   # 訂購數量
+    quantity = Column(Integer)   # 訂購數量
 
-    create_time = Column(DateTime, default=func.now())  # 訂單建立時間
+    created_time = Column(DateTime, default=func.now())  # 訂單建立時間
 
     order_id = Column('order_id', ForeignKey('orders.id'))

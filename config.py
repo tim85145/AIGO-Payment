@@ -7,6 +7,8 @@ class Config:
     CHANNEL_SECRET = '24a8203d84fa58b823140d6b5f1ec727'
 
     LINE_PAY_ID = '2000604810'
+    # 2000604810
     LINE_PAY_SECRET = 'c15570a8c6ca91f32ecebbe409a4fc50'
+    # c15570a8c6ca91f32ecebbe409a4fc50
 
     STORE_IMAGE_URL = 'https://i.imgur.com/iMZQLjv.jpg'
