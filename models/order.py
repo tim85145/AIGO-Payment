@@ -7,7 +7,7 @@ from database import Base
 class Orders(Base):
     __tablename__ = 'orders'
 
-    id = Column(String, primary_key=True)
+    id = Column(String, primary_key=True)   # 訂單編號
 
     amount = Column(Integer)    # 訂單金額
 

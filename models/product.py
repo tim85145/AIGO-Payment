@@ -68,7 +68,7 @@ class Products(Base):
                     ]
                 )
             )
-
+            print('test')
             bubbles.append(bubble)
 
         carousel_container = CarouselContainer(contents=bubbles)
